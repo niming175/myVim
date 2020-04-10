@@ -103,6 +103,7 @@ Plug 'Valloric/YouCompleteMe'
 " markdown 插件
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -195,7 +196,7 @@ nmap <C-P> :Files<CR>
 " 让输入上方，搜索列表在下方
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 
-" 打开 fzf 的方式选择 floating window
+" 打开 fzf 的方式选择 floating window 仅在最新版本（0.4以上版本）的nvim支持
 let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
 
 " 窗口浮动函数
@@ -239,3 +240,8 @@ let g:ycm_python_binary_path = "/usr/bin/python3"
 " emmet 插件
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,js,vue,jsx EmmetInstall
+
+" 缩进线设置
+let g:indentLine_color_term = 243
+let g:indentLine_char = '┊'
+
