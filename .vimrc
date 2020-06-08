@@ -91,7 +91,7 @@ Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 
 " php 支持
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
+" Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' :['markdown', 'vim-plug'] }
 " Plug 'kien/ctrlp.vim' " crtlP的速度会慢点
@@ -100,10 +100,19 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'Valloric/YouCompleteMe'
 
-" markdown 插件
+" 文本对齐插件
 Plug 'godlygeek/tabular'
+" markdown 插件
 Plug 'plasticboy/vim-markdown'
+" tab对齐线
 Plug 'Yggdroot/indentLine'
+
+" php补全插件。ycm对php补全并不友好
+Plug 'phpvim/phpcd.vim', { 'for': 'php' }
+Plug 'vim-scripts/progressbar-widget' " 用来显示索引进度的插件
+
+" nginx高亮支持
+Plug 'chr4/nginx.vim'
 
 call plug#end()
 
@@ -123,11 +132,11 @@ endif
 
 " 行移动
 nnoremap <M-up> :m .-2<CR>==
-nnoremap <down> :m .+1<CR>==
-inoremap <up> <Esc>:m .-2<CR>==gi
-inoremap <down> <Esc>:m .+1<CR>==gi
-vnoremap <up> :m '<-2<CR>gv=gv
-vnoremap <down> :m '>+1<CR>gv=gv
+nnoremap <M-down> :m .+1<CR>==
+inoremap <M-up> <Esc>:m .-2<CR>==gi
+inoremap <M-down> <Esc>:m .+1<CR>==gi
+vnoremap <M-up> :m '<-2<CR>gv=gv
+vnoremap <M-down> :m '>+1<CR>gv=gv
 
 " 保存快捷键
 inoremap <C-S> <Esc>:w<CR>li
@@ -175,7 +184,11 @@ map <LEADER>n :NERDTreeToggle<CR>
 let g:jsx_ext_required = 0
 
 " markdown 插件
-autocmd Filetype markdown map <LEADER>k :MarkdownPreview <CR>
+autocmd Filetype markdown map <LEADER>m :MarkdownPreview <CR>
+" 禁用markdown代码框符号的隐藏
+let g:vim_markdown_conceal_code_blocks = 0
+" 禁用符号隐藏
+let g:vim_markdown_conceal = 0
 
 " 文件查找插件
 " let g:ctrlp_map = '<c-p>'
@@ -237,11 +250,17 @@ let g:ycm_use_clangd = 0
 let g:ycm_python_interpreter_path = "/usr/bin/python3"
 let g:ycm_python_binary_path = "/usr/bin/python3"
 
+" phpcd 这对php的补全插件
+autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+
 " emmet 插件
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,js,vue,jsx EmmetInstall
 
-" 缩进线设置
+" 缩进线indentline 插件设置
 let g:indentLine_color_term = 243
 let g:indentLine_char = '┊'
 
+" 设置json时不显示缩进线
+autocmd FileType json,markdown let g:indentLine_conceallevel=0
+autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel=2
