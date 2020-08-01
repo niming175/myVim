@@ -97,6 +97,14 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' :
 " Plug 'kien/ctrlp.vim' " crtlP的速度会慢点
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" 最近常打开文件
+Plug 'lvht/fzf-mru'
+
+" 打开会话，会有头牛
+Plug 'mhinz/vim-startify'
+
+" 搜索
+Plug 'mileszs/ack.vim'
 
 Plug 'Valloric/YouCompleteMe'
 
@@ -108,8 +116,11 @@ Plug 'plasticboy/vim-markdown'
 Plug 'Yggdroot/indentLine'
 
 " php补全插件。ycm对php补全并不友好
-Plug 'phpvim/phpcd.vim', { 'for': 'php' }
+" Plug 'phpvim/phpcd.vim', { 'for': 'php' }
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 Plug 'vim-scripts/progressbar-widget' " 用来显示索引进度的插件
+
+Plug 'lvht/phpfold.vim', { 'for': 'php', 'do': 'composer install' }
 
 " nginx高亮支持
 Plug 'chr4/nginx.vim'
@@ -206,6 +217,18 @@ let g:vim_markdown_conceal = 0
 " fzf 搜索
 nmap <C-P> :Files<CR>
 
+" fzf_mru 最近常打开文件
+let g:fzf_mru_file_list_size = 10
+let g:fzf_mru_ignore_patterns = 'fugitive\|\.git/\|\_^/tmp/'
+
+" 单词搜索
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+
+" cnoreabbrev Ack Ack!
+nnoremap <Leader>f :Ack<space>-i<space>
+
 " 让输入上方，搜索列表在下方
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 
@@ -251,7 +274,9 @@ let g:ycm_python_interpreter_path = "/usr/bin/python3"
 let g:ycm_python_binary_path = "/usr/bin/python3"
 
 " phpcd 这对php的补全插件
-autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+" autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+let g:phpcd_php_cli_executable = 'php7.2'
+let g:phpfold_include_surround_blank_lines = 'downward'
 
 " emmet 插件
 let g:user_emmet_install_global = 0
