@@ -108,8 +108,10 @@ Plug 'plasticboy/vim-markdown'
 Plug 'Yggdroot/indentLine'
 
 " php补全插件。ycm对php补全并不友好
-Plug 'phpvim/phpcd.vim', { 'for': 'php' }
-Plug 'vim-scripts/progressbar-widget' " 用来显示索引进度的插件
+" Plug 'phpvim/phpcd.vim', { 'for': 'php' }
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+" Plug 'vim-scripts/progressbar-widget' " 用来显示索引进度的插件
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " nginx高亮支持
 Plug 'chr4/nginx.vim'
@@ -169,6 +171,10 @@ map <LEADER><left> :vertical resize+3<CR>
 map <LEADER>t :tabe<CR>
 map <LEADER>- :-tabnext<CR>
 map <LEADER>= :+tabnext<CR>
+
+" 复制到剪贴板
+nmap <c-v> "+gp  
+nmap <c-c> "+y
 
 " 刷新配置
 map R :source $MYVIMRC<CR>
@@ -252,6 +258,11 @@ let g:ycm_python_binary_path = "/usr/bin/python3"
 
 " phpcd 这对php的补全插件
 autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+" autocmd FileType php set omnifunc=phpcomplete
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('ignore_sources', {'php': ['phpcd', 'omni']})
+
+let g:phpcd_php_cli_executable = 'php7.3'
 
 " emmet 插件
 let g:user_emmet_install_global = 0
