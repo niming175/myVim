@@ -98,6 +98,15 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' :
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" 最近常打开文件
+Plug 'lvht/fzf-mru'
+
+" 打开会话，会有头牛
+Plug 'mhinz/vim-startify'
+
+" 搜索
+Plug 'mileszs/ack.vim'
+
 Plug 'Valloric/YouCompleteMe'
 
 " 文本对齐插件
@@ -208,6 +217,17 @@ let g:vim_markdown_conceal = 0
 "   \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|vendor|node_modules)$',
 "   \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
 "   \ }
+" fzf_mru 最近常打开文件
+let g:fzf_mru_file_list_size = 10
+let g:fzf_mru_ignore_patterns = 'fugitive\|\.git/\|\_^/tmp/'
+
+" 单词搜索
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+
+" cnoreabbrev Ack Ack!
+nnoremap <Leader>f :Ack<space>-i<space>
 
 " fzf 搜索
 nmap <C-P> :Files<CR>
