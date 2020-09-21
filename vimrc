@@ -16,9 +16,14 @@ set incsearch
 set ignorecase
 set smartcase
 
+set updatetime=100
+
+" Don't pass message to | ins-completion-memu
+set shortmess+=c
+
 " 搜搜用- = 键来切换上下文
-noremap = nzz
-noremap - Nzz
+nmap = nzz
+nmap - Nzz
 
 " 取消高亮
 noremap <LEADER><CR> :nohlsearch<CR>
@@ -43,6 +48,12 @@ au FileType php setlocal shiftwidth=4
 au FileType php setlocal softtabstop=4
 set autoindent  " 设置为自动缩进
 set expandtab
+
+" 文本缩进
+nmap <tab> V>
+nmap <s-tab> V<
+vmap <tab> >gv
+vmap <s-tab> <gv
 
 " 显示不可见字符
 set list
@@ -107,7 +118,8 @@ Plug 'mhinz/vim-startify'
 " 搜索
 Plug 'mileszs/ack.vim'
 
-Plug 'Valloric/YouCompleteMe'
+" 不是个很好的补全
+" Plug 'Valloric/YouCompleteMe'
 
 " 文本对齐插件
 Plug 'godlygeek/tabular'
@@ -118,18 +130,29 @@ Plug 'Yggdroot/indentLine'
 
 " php补全插件。ycm对php补全并不友好
 " Plug 'phpvim/phpcd.vim', { 'for': 'php' }
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 " Plug 'vim-scripts/progressbar-widget' " 用来显示索引进度的插件
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " nginx高亮支持
 Plug 'chr4/nginx.vim'
 
+" coc插件
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" 注释插件
+Plug 'preservim/nerdcommenter'
+
 call plug#end()
 
 let g:airline_theme='light'
+
 " 主题
 color monokai
+
+" 设置提示窗口主题
+hi Pmenu ctermfg=237 ctermbg=249 cterm=NONE guifg=NONE guibg=NONE gui=NONE
+
 let g:SnazzyTransparent = 1
 
 " 鼠标操作
@@ -262,22 +285,22 @@ function! OpenFloatingWin()
 
   setlocal
         \ buftype=nofile
-        \ nobuflisted
         \ bufhidden=hide
+        \ nobuflisted
         \ nonumber
         \ norelativenumber
         \ signcolumn=no
 endfunction
 
 " you complete me
-let g:ycm_autoclose_preview_window_after_completion=0
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_use_clangd = 0
-let g:ycm_python_interpreter_path = "/usr/bin/python3"
-let g:ycm_python_binary_path = "/usr/bin/python3"
+" let g:ycm_autoclose_preview_window_after_completion=0
+" let g:ycm_autoclose_preview_window_after_insertion=1
+" let g:ycm_use_clangd = 0
+" let g:ycm_python_interpreter_path = "/usr/bin/python3"
+" let g:ycm_python_binary_path = "/usr/bin/python3"
 
 " phpcd 这对php的补全插件
-autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+" autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 " autocmd FileType php set omnifunc=phpcomplete
 " let g:deoplete#enable_at_startup = 1
 " call deoplete#custom#option('ignore_sources', {'php': ['phpcd', 'omni']})
@@ -295,3 +318,103 @@ let g:indentLine_char = '┊'
 " 设置json时不显示缩进线
 autocmd FileType json,markdown let g:indentLine_conceallevel=0
 autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel=2
+
+" coc 插件
+let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-vimlsp', 'coc-phpls', 'coc-tsserver', 'coc-prettier', 'coc-eslint']
+
+" 按tab补全，ycm有已经自带了这个设置，如果有开启ycm可以不设置以下
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" 快捷键ctrl + 空格触发补全, vim的话，则是ctrl + @
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" 回车选中补全，而不是换行
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" 查找上下文的错误， g + [ 或 g + ]
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" 查找上下文定义的函数
+" nmap <silent> <C-b> :tabe<cr><Plug>(coc-definition)
+" 以新页面打开定义的函数
+nmap <silent> <C-b> :call CocAction('jumpDefinition', 'tab drop')<CR>
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" 查看文档 主键 + H
+nnoremap <silent> <LEADER>H :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" 相同词高亮
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Formatting selected code.
+" 选中代码格式化
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" 注释配置
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' }} 
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+nmap <C-c> <Plug>NERDCommenterToggle

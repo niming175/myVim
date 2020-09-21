@@ -1,0 +1,40 @@
+{
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "suggest.noselect": true,
+  "suggest.enablePreselect": false,
+  "prettier.eslintIntegration": true,
+  "eslint.enable": true,
+  "eslint.run": "onType", // 在保存的时候检查esline
+  "eslint.autoFixOnSave": false, // 在保存的时候修复错误
+  // 显示esline文档
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  }, 
+  "suggest.completionItemKindLabels": {
+		"class": "类",
+		"color": "颜",
+		"constant": "\uf8fe",
+		"default": "默",
+		"enum": "\uf435",
+		"enumMember": "\uf02b",
+		"event": "\ufacd",
+		"field": "\uf93d",
+		"file": "\uf723",
+		"folder": "\uf115",
+		"function": "函",
+		"interface": "\uf417",
+		"keyword": "\uf1de",
+		"method": "\uf6a6",
+		"module": "\uf40d",
+		"operator": "\uf915",
+		"property": "\ue624",
+		"reference": "\ufa46",
+		"snippet": "\ue60b",
+		"struct": "\ufb44",
+		"text": "\ue612",
+		"typeParameter": "\uf728",
+		"unit": "\uf475",
+		"value": "值",
+		"variable": "\ue71b"
+	}
+}
