@@ -1,5 +1,5 @@
 {
-  "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.extensionUpdateCheck": "never",
   "suggest.noselect": true,
   "suggest.enablePreselect": false,
   "prettier.eslintIntegration": true,
@@ -10,6 +10,7 @@
   "eslint.codeAction.showDocumentation": {
     "enable": true
   }, 
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "js", "jsx", "javascriptreact", "javascript", "typescript", "typescriptreact", "vue"],
   "suggest.completionItemKindLabels": {
 		"class": "类",
 		"color": "颜",
@@ -36,5 +37,6 @@
 		"unit": "\uf475",
 		"value": "值",
 		"variable": "\ue71b"
-	}
+	},
+  "coc.preferences.colorSupport": true
 }

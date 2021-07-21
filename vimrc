@@ -143,6 +143,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " 注释插件
 Plug 'preservim/nerdcommenter'
 
+" xdebug调试
+" Plug 'brookhong/dbgpavim'
+Plug 'vim-vdebug/vdebug'
+
+" 格式化插件
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/0.x'
+  \ }
+
 call plug#end()
 
 let g:airline_theme='light'
@@ -151,7 +161,9 @@ let g:airline_theme='light'
 color monokai
 
 " 设置提示窗口主题
-hi Pmenu ctermfg=237 ctermbg=249 cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi Pmenu ctermfg=249 ctermbg=239 cterm=NONE guifg=NONE guibg=NONE gui=NONE
+" 注释颜色
+hi Comment ctermfg=249
 
 let g:SnazzyTransparent = 1
 
@@ -309,7 +321,9 @@ let g:phpcd_php_cli_executable = 'php7.3'
 
 " emmet 插件
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,js,vue,jsx EmmetInstall
+autocmd FileType html,css,js,vue,jsx,javascript EmmetInstall
+let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+let g:user_emmet_leader_key='<C-E>'
 
 " 缩进线indentline 插件设置
 let g:indentLine_color_term = 243
@@ -320,7 +334,7 @@ autocmd FileType json,markdown let g:indentLine_conceallevel=0
 autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel=2
 
 " coc 插件
-let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-vimlsp', 'coc-phpls', 'coc-tsserver', 'coc-prettier', 'coc-eslint']
+let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-vimlsp', 'coc-phpls', 'coc-tsserver', 'coc-prettier', 'coc-eslint', 'coc-highlight']
 
 " 按tab补全，ycm有已经自带了这个设置，如果有开启ycm可以不设置以下
 inoremap <silent><expr> <TAB>
@@ -378,6 +392,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " 选中代码格式化
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+vmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -418,3 +433,24 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 nmap <C-c> <Plug>NERDCommenterToggle
+
+" coc-highlight
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" set termguicolors
+
+imap <C-x> <Esc>:wq<CR>
+
+" xdebug调试
+" let g:dbgPavimOnce = 1
+" let g:dbgPavimBreakAtEntry = 1
+
+" let g:dbgPavimPathMap = [['/Volumes/Document/www/shopifyerp/backend','/var/www/shopifyerp/backend'],] " 映射文件位置
+" let g:dbgPavimPort = 9000
+" let g:dbgPavimBreakAtEntry = 0
+
+if !exists('g:vdebug_options')
+    let g:vdebug_options = {}
+endif
+let g:vdebug_options.port = 9000
+let g:vdebug_options.path_maps = { "/var/www": "/Volumes/Document/www" }
+let g:vdebug_options.break_on_open = 0
