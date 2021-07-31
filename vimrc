@@ -334,7 +334,7 @@ autocmd FileType json,markdown let g:indentLine_conceallevel=0
 autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel=2
 
 " coc 插件
-let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-vimlsp', 'coc-phpls', 'coc-tsserver', 'coc-prettier', 'coc-eslint', 'coc-highlight']
+let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-vimlsp', 'coc-phpls', 'coc-tsserver', 'coc-prettier', 'coc-eslint', 'coc-highlight', 'coc-vetur']
 
 " 按tab补全，ycm有已经自带了这个设置，如果有开启ycm可以不设置以下
 inoremap <silent><expr> <TAB>
