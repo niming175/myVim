@@ -334,7 +334,8 @@ autocmd FileType json,markdown let g:indentLine_conceallevel=0
 autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel=2
 
 " coc 插件
-let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-vimlsp', 'coc-phpls', 'coc-tsserver', 'coc-prettier', 'coc-eslint', 'coc-highlight', 'coc-vetur']
+let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-vimlsp', 'coc-phpls', 'coc-tsserver', 'coc-eslint', 'coc-highlight', 'coc-vetur']
+" 'coc-prettier'
 
 " 按tab补全，ycm有已经自带了这个设置，如果有开启ycm可以不设置以下
 inoremap <silent><expr> <TAB>
@@ -454,3 +455,17 @@ endif
 let g:vdebug_options.port = 9000
 let g:vdebug_options.path_maps = { "/var/www": "/Volumes/Document/www" }
 let g:vdebug_options.break_on_open = 0
+
+"""""""""""""""""""" vim prettier config """""""""""""""""""""""
+" 当存在@format或@prettier时自动格式化
+let g:prettier#autoformat = 1
+
+" 根据当前目录或任何父目录中找到配置文件来切换g:prettier#autoformat 设置。
+" 请注意，这将覆盖 g:prettier#autoformat设置！
+let g:prettier#autoformat_config_present = 1
+
+" 格式化配置文件
+" let g:prettier#autoformat_config_files = [...]
+
+" 格式化快捷键
+nmap <Leader>F <Plug>(Prettier)
