@@ -2,7 +2,6 @@
   "coc.preferences.extensionUpdateCheck": "never",
   "suggest.noselect": true,
   "suggest.enablePreselect": false,
-  "prettier.eslintIntegration": true,
   "eslint.enable": true,
   "eslint.run": "onType", // 在保存的时候检查esline
   "eslint.autoFixOnSave": false, // 在保存的时候修复错误
@@ -10,7 +9,8 @@
   "eslint.codeAction.showDocumentation": {
     "enable": true
   }, 
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "js", "jsx", "javascriptreact", "javascript", "typescript", "typescriptreact", "vue"],
+  // 自动格式化
+  // "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "js", "jsx", "javascriptreact", "javascript", "typescript", "typescriptreact", "vue"],
   "suggest.completionItemKindLabels": {
 		"class": "类",
 		"color": "颜",
@@ -38,5 +38,36 @@
 		"value": "值",
 		"variable": "\ue71b"
 	},
-  "coc.preferences.colorSupport": true
+  "coc.preferences.colorSupport": true,
+  "javascript.format.enabled": true,
+  "cSpell.userWords": [
+    "mygroup",
+    "phpls",
+    "struct",
+    "vdebug",
+    "vetur",
+    "xdebug"
+  ],
+  "cSpell.enabledLanguageIds": [
+    "javascript",
+    "javascriptreact",
+    "markdown",
+    "php",
+    "plaintext",
+    "typescript",
+    "typescriptreact",
+    "yml"
+  ],
+  "cSpell.enabled": true,
+  "cSpell.ignorePaths": [
+      "public",
+      "node_modules",        // this will ignore anything the node_modules directory
+      "**/node_modules",     // the same for this one
+      "**/node_modules/**",  // the same for this one
+      "node_modules/**",     // Doesn't currently work due to how the current working directory is determined.
+      "vscode-extension",    //
+      ".git",                // Ignore the .git directory
+      "*.dll",               // Ignore all .dll files.
+      "**/*.dll"             // Ignore all .dll files
+  ]
 }

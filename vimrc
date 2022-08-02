@@ -5,9 +5,15 @@ set helplang=cn
 set encoding=utf-8
 set t_Co=256
 
+" set spelllang=en_us
+" set spell
+
 set nocompatible
 set cursorline " 光标线
 set showcmd
+
+" set cindent " 换行缩进
+" set si
 
 " 搜索
 set hlsearch
@@ -46,12 +52,12 @@ set softtabstop=2
 au FileType php setlocal tabstop=4 " php 为4个缩进
 au FileType php setlocal shiftwidth=4
 au FileType php setlocal softtabstop=4
-set autoindent  " 设置为自动缩进
+" set autoindent  " 设置为自动缩进
 set expandtab
 
 " 文本缩进
-nmap <tab> V>
-nmap <s-tab> V<
+" nmap <tab> V>
+" nmap <s-tab> V<
 vmap <tab> >gv
 vmap <s-tab> <gv
 
@@ -95,8 +101,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sickill/vim-monokai'
 Plug 'connorholyday/vim-snazzy'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
+"
+Plug 'maxmellon/vim-jsx-pretty'
 
 " html 补全
 Plug 'mattn/emmet-vim'
@@ -118,9 +128,6 @@ Plug 'mhinz/vim-startify'
 " 搜索
 Plug 'mileszs/ack.vim'
 
-" 不是个很好的补全
-" Plug 'Valloric/YouCompleteMe'
-
 " 文本对齐插件
 Plug 'godlygeek/tabular'
 " markdown 插件
@@ -140,6 +147,9 @@ Plug 'chr4/nginx.vim'
 " coc插件
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" 模糊搜索
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+
 " 注释插件
 Plug 'preservim/nerdcommenter'
 
@@ -152,6 +162,11 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'branch': 'release/0.x'
   \ }
+
+" 多光标选择插件
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" 🌈括号
+Plug 'luochen1990/rainbow'
 
 call plug#end()
 
@@ -217,7 +232,7 @@ map <LEADER>- :-tabnext<CR>
 map <LEADER>= :+tabnext<CR>
 
 " 复制到剪贴板
-nmap <c-v> "+gp  
+nmap <c-v> "+gp
 nmap <c-c> "+y
 
 " 刷新配置
@@ -231,7 +246,8 @@ map Q :q<CR>
 map <LEADER>n :NERDTreeToggle<CR>
 
 " jsx 插件支持
-let g:jsx_ext_required = 0
+" let g:javascript_plugin_jsdoc=1
+" let g:jsx_ext_required = 1
 
 " markdown 插件
 autocmd Filetype markdown map <LEADER>m :MarkdownPreview <CR>
@@ -239,6 +255,16 @@ autocmd Filetype markdown map <LEADER>m :MarkdownPreview <CR>
 let g:vim_markdown_conceal_code_blocks = 0
 " 禁用符号隐藏
 let g:vim_markdown_conceal = 0
+
+" ---------------------- Markdown Preview 插件 ----------------------
+let g:mkdp_open_to_the_world = 1
+" makrdown预览插件，默认开启端口
+let g:mkdp_open_ip = '127.0.0.1'
+let g:mkdp_port = '8081'
+" function! g:Open_browser(url)
+"     silent exe '!lemonade open 'a:url
+" endfunction
+" let g:mkdp_browserfunc = 'g:Open_browser'
 
 " 文件查找插件
 " let g:ctrlp_map = '<c-p>'
@@ -321,8 +347,8 @@ let g:phpcd_php_cli_executable = 'php7.3'
 
 " emmet 插件
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,js,vue,jsx,javascript EmmetInstall
-let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+autocmd FileType html,css,js,vue,jsx,javascript,php EmmetInstall
+let g:user_emmet_mode='a'  " 在所有模式下开启
 let g:user_emmet_leader_key='<C-E>'
 
 " 缩进线indentline 插件设置
@@ -334,7 +360,18 @@ autocmd FileType json,markdown let g:indentLine_conceallevel=0
 autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel=2
 
 " coc 插件
-let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-css', 'coc-vimlsp', 'coc-phpls', 'coc-tsserver', 'coc-eslint', 'coc-highlight', 'coc-vetur']
+let g:coc_global_extensions = [
+      \ 'coc-json',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-vimlsp',
+      \ 'coc-phpls',
+      \ 'coc-tsserver',
+      \ 'coc-eslint',
+      \ 'coc-highlight',
+      \ 'coc-vetur',
+      \ 'coc-spell-checker'
+      \]
 " 'coc-prettier'
 
 " 按tab补全，ycm有已经自带了这个设置，如果有开启ycm可以不设置以下
@@ -422,7 +459,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
 
 " Add your own custom formats or override the defaults
-" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' }} 
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' }}
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
@@ -430,10 +467,11 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
-nmap <C-c> <Plug>NERDCommenterToggle
+nmap <C-c>   <Plug>NERDCommenterToggle
+vmap <C-c>   <Plug>NERDCommenterToggle<CR>gv
 
 " coc-highlight
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -469,3 +507,22 @@ let g:prettier#autoformat_config_present = 1
 
 " 格式化快捷键
 nmap <Leader>F <Plug>(Prettier)
+
+"*********** vim-visual-multi 多光标配置 *******************"
+let g:VM_theme                      = 'ocean'
+let g:VM_highlight_matches          = 'red'
+let g:VM_maps                       = {}
+let g:VM_maps['Find Under']         = '<C-d>'
+let g:VM_maps['Find Subword Under'] = '<C-d>'
+let g:VM_maps['Select All']         = '<C-l>'
+let g:VM_maps['Select h']           = '<S-Left>'
+let g:VM_maps['Select l']           = '<S-Right>'
+let g:VM_maps['Add Cursor Up']      = '<S-Up>'
+let g:VM_maps['Add Cursor Down']    = '<C-Down>'
+" let g:VM_maps['Add Cursor At Pos']  = '<C-x>'
+" let g:VM_maps['Add Cursor At Word'] = '<C-w>'
+let g:VM_maps['Remove Region']      = 'q'
+
+"************* 彩虹括号 ***************************************"
+let g:rainbow_active = 1
+
