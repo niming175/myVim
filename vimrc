@@ -291,7 +291,7 @@ if executable('ag')
 endif
 
 " cnoreabbrev Ack Ack!
-nnoremap <Leader>f :Ack<space>-i<space>
+" nnoremap <Leader>f :Ack<space>-i<space>
 
 " fzf 搜索
 nmap <C-P> :Files<CR>
