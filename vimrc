@@ -168,6 +168,9 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " 🌈括号
 Plug 'luochen1990/rainbow'
 
+" tagbar 函数树
+Plug 'majutsushi/tagbar'
+
 call plug#end()
 
 let g:airline_theme='light'
@@ -374,12 +377,17 @@ let g:coc_global_extensions = [
       \]
 " 'coc-prettier'
 
+" set signcolumn=no
+
 " 按tab补全，ycm有已经自带了这个设置，如果有开启ycm可以不设置以下
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -391,13 +399,6 @@ if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" 回车选中补全，而不是换行
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " 查找上下文的错误， g + [ 或 g + ]
