@@ -41,8 +41,10 @@
   "coc.preferences.colorSupport": true,
   "javascript.format.enabled": true,
   "cSpell.userWords": [
+    "endsection",
     "mygroup",
     "phpls",
+    "skus",
     "struct",
     "vdebug",
     "vetur",
@@ -69,5 +71,10 @@
       ".git",                // Ignore the .git directory
       "*.dll",               // Ignore all .dll files.
       "**/*.dll"             // Ignore all .dll files
-  ]
+  ],
+  "emmet.includeLanguages": {
+    "vue-html": "html", 
+    "javascript": "javascriptreact"
+  },
+  "prettier.enable": true
 }
