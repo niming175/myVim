@@ -109,7 +109,7 @@ Plug 'connorholyday/vim-snazzy'
 Plug 'maxmellon/vim-jsx-pretty'
 
 " html 补全
-" Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
 " php 支持
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
@@ -158,10 +158,10 @@ Plug 'preservim/nerdcommenter'
 Plug 'vim-vdebug/vdebug'
 
 " 格式化插件
-" Plug 'prettier/vim-prettier', {
-"  \ 'do': 'yarn install',
-"   \ 'branch': 'release/0.x'
-"   \ }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/0.x'
+  \ }
 
 " 多光标选择插件
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -349,10 +349,10 @@ endfunction
 let g:phpcd_php_cli_executable = 'php7.3'
 
 " emmet 插件
-" let g:user_emmet_install_global = 0
-" autocmd FileType html,css,js,vue,jsx,javascript,php EmmetInstall
-" let g:user_emmet_mode='a'  " 在所有模式下开启
-" let g:user_emmet_leader_key='<C-E>'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,js,vue,jsx,javascript,php EmmetInstall
+let g:user_emmet_mode='a'  " 在所有模式下开启
+let g:user_emmet_leader_key='<C-E>'
 
 " 缩进线indentline 插件设置
 let g:indentLine_color_term = 243
@@ -365,7 +365,6 @@ autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceal
 " coc 插件
 let g:coc_global_extensions = [
       \ 'coc-json',
-      \ 'coc-emmet',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-vimlsp',
@@ -375,9 +374,11 @@ let g:coc_global_extensions = [
       \ 'coc-highlight',
       \ 'coc-vetur',
       \ 'coc-spell-checker',
-      \ 'coc-prettier'
+      \ 'coc-git',
       \]
 
+" 'coc-emmet',
+" 'coc-prettier'
 " set signcolumn=no
 
 " 按tab补全，ycm有已经自带了这个设置，如果有开启ycm可以不设置以下
@@ -498,20 +499,20 @@ let g:vdebug_options.break_on_open = 0
 
 """""""""""""""""""" vim prettier config """""""""""""""""""""""
 " 当存在@format或@prettier时自动格式化
-" let g:prettier#autoformat = 1
+let g:prettier#autoformat = 1
 
 " 根据当前目录或任何父目录中找到配置文件来切换g:prettier#autoformat 设置。
 " 请注意，这将覆盖 g:prettier#autoformat设置！
-" let g:prettier#autoformat_config_present = 1
+let g:prettier#autoformat_config_present = 1
 
 " 格式化配置文件
 " let g:prettier#autoformat_config_files = [...]
 
 " 格式化快捷键
-" nmap <Leader>F <Plug>(Prettier)
+nmap <Leader>F <Plug>(Prettier)
 "*********** coc Prettier ***************************"
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f :CocCommand prettier.formatFile <CR>
+" vmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f :CocCommand prettier.formatFile <CR>
 
 "*********** vim-visual-multi 多光标配置 *******************"
 let g:VM_theme                      = 'ocean'
