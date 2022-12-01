@@ -296,6 +296,9 @@ endif
 " fzf 搜索
 nmap <C-P> :Files<CR>
 
+" 过滤掉不必要的文件夹
+let $FZF_DEFAULT_COMMAND='find . \( -name .git -o -name .idea -o -name .vscode -o -name .sass-cache -o -name node_modules -o -name build -o -name public \) -prune -o -print'
+
 " 让输入上方，搜索列表在下方
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 

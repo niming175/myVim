@@ -1,6 +1,5 @@
 # myVim
 
-
 ### 我的vim配置
 - 集成[vim-plug](https://github.com/junegunn/vim-plug)管理插件；
 - coc.nvim 子插件管理
@@ -79,7 +78,7 @@ ln -s vimrc ~/.config/nvim/init.vim
 
 ### 未来计划
 - 整个工程目录下搜索，像`vscode` 的`ctrl` + `shift` + `f`;
-- 优化：文件查找排除`node_modules`，`dist`等文件夹；
+- <s>优化：文件查找排除`node_modules`，`dist`等文件夹;</s>
 
 
 
