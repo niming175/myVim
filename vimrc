@@ -98,7 +98,9 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdtree' | 
+  \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+  \ Plug 'ryanoasis/vim-devicons'
 Plug 'sickill/vim-monokai'
 Plug 'connorholyday/vim-snazzy'
 " Plug 'pangloss/vim-javascript'
@@ -115,7 +117,6 @@ Plug 'mattn/emmet-vim'
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' :['markdown', 'vim-plug'] }
-" Plug 'kien/ctrlp.vim' " crtlP的速度会慢点
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -171,9 +172,13 @@ Plug 'luochen1990/rainbow'
 " tagbar 函数树
 Plug 'majutsushi/tagbar'
 
+" 全局搜搜
+Plug 'dyng/ctrlsf.vim'
+
 call plug#end()
 
 let g:airline_theme='light'
+let g:airline_powerline_fonts = 1
 
 " 主题
 color monokai
@@ -246,7 +251,33 @@ map S :w<CR>
 map Q :q<CR>
 
 " 插件快捷键
-map <LEADER>n :NERDTreeToggle<CR>
+
+" NERDTree 目录树插件配置
+map <LEADER>b :NERDTreeToggle<CR>
+map <LEADER>n :NERDTreeFind<CR>
+
+" 默认打开vim 时展开目录树，并聚焦在其他窗口
+" autocmd VimEnter * NERDTree | wincmd p
+
+" 状态图标
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+let g:NERDTreeGitStatusUseNerdFonts = 1
+" 隐藏中括号
+let g:NERDTreeGitStatusConcealBrackets = 1
+
+let g:webdevicons_enable_airline_tabline = 1
 
 " jsx 插件支持
 " let g:javascript_plugin_jsdoc=1
@@ -325,7 +356,7 @@ function! OpenFloatingWin()
   let win = nvim_open_win(buf, v:true, opts)
 
   " 设置浮动窗口高亮
-  call setwinvar(win, '&winhl', 'Normal:Pmenu')
+  call setwinvar(win, '&winhl', 'No<Plug>CtrlSFCwordPathrmal:Pmenu')
 
   setlocal
         \ buftype=nofile
@@ -535,3 +566,33 @@ let g:VM_maps['Remove Region']      = 'q'
 "************* 彩虹括号 ***************************************"
 let g:rainbow_active = 1
 
+"************* ctrlsf 全局搜索 ********************************"
+nmap <leader>f <Plug>CtrlSFPrompt
+nmap <leader>F :CtrlSFToggle<CR>
+vmap <leader>F <Plug>CtrlSFVwordExec
+" vmap <C-F>F <Plug>CtrlSFVwordExec
+nmap <C-F>n <Plug>CtrlSFCwordPath
+
+" 搜索类型 compact 紧凑 | normal 自然
+let g:ctrlsf_default_view_mode = 'compact'
+let g:ctrlsf_search_mode = 'async'
+" 结果位置, 搜索类型compact 时有效
+let g:ctrlsf_position = 'left_local'
+" 搜索位置
+let g:ctrlsf_compact_position = 'bottom_outside'
+
+" 打开文件后，是否关闭CtrlSF
+let g:ctrlsf_auto_close = {
+    \"normal" : 0,
+    \"compact": 1
+    \}
+
+" 聚焦
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
+
+let g:ctrlsf_auto_preview = 1
+
+" 过滤掉文件夹
+let g:ctrlsf_ignore_dir = ['bower_components', 'vendor', 'runtime', 'node_module', 'dist']
