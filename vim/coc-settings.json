@@ -41,13 +41,25 @@
   "coc.preferences.colorSupport": true,
   "javascript.format.enabled": true,
   "cSpell.userWords": [
+    "ALIPAY",
+    "Maatwebsite",
+    "PAYPAL",
+    "REFUNED",
+    "Srmklive",
+    "aggs",
+    "apiclient",
+    "endcomponent",
     "endsection",
+    "laravel",
     "mygroup",
     "phpls",
+    "seckill",
     "skus",
     "struct",
+    "swal",
     "vdebug",
     "vetur",
+    "wechat",
     "xdebug"
   ],
   "cSpell.enabledLanguageIds": [
@@ -77,4 +89,4 @@
     "javascript": "javascriptreact"
   },
   "prettier.enable": true
-}
+  }

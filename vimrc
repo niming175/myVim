@@ -1,180 +1,13 @@
 " 领导键
 let mapleader=' '
 
-set helplang=cn
-set encoding=utf-8
-set t_Co=256
-
-set nocompatible
-set cursorline " 光标线
-set showcmd
-
-" set cindent " 换行缩进
-" set si
-
-" 搜索
-set hlsearch
-exec "nohlsearch"
-set incsearch
-set ignorecase
-set smartcase
-
-set updatetime=100
-
-" Don't pass message to | ins-completion-memu
-set shortmess+=c
-
-" 显示最后一行状态
-set ruler
-
-" 搜搜用- = 键来切换上下文
-nmap = nzz
-nmap - Nzz
-
-" 取消高亮
-noremap <LEADER><CR> :nohlsearch<CR>
-
-filetype on
-filetype indent on
-filetype plugin on
-filetype plugin indent on
-
-syntax on " 自动语法高亮
-
-let &t_ut=''
-
-set number
-
-set tabstop=2 " tab键
-set shiftwidth=2 " 设置两个空格宽度
-set softtabstop=2
-
-au FileType php setlocal tabstop=4 " php 为4个缩进
-au FileType php setlocal shiftwidth=4
-au FileType php setlocal softtabstop=4
-" set autoindent  " 设置为自动缩进
-set expandtab
-
-" 文本缩进
-" nmap <tab> V>
-" nmap <s-tab> V<
-vmap <tab> >gv
-vmap <s-tab> <gv
-
-" 显示不可见字符
-set list
-set listchars=tab:▸\ ,trail:▫
-
-" 距离行尾还有5行
-set scrolloff=5
-
-" 不自动换行
-set tw=0
-
-" 设置删除
-set backspace=indent,eol,start
-
-" 代码折叠
-set foldmethod=indent
-set foldlevel=99
-
-" 光标样式, 部分终端不一定起作用
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-" 显示最后一个窗口的状态行
-set laststatus=2
-
-" 切换到当前文件所在目录
-" set autochdir
-
-" 打开文件后恢复关闭前所在的位置
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" 基本配置
+source ~/.config/nvim/src/base.vim
 
 " 插件
 " call plug#begin()
 call plug#begin('~/.vim/plugged')
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'preservim/nerdtree' | 
-  \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-  \ Plug 'ryanoasis/vim-devicons'
-Plug 'sickill/vim-monokai'
-Plug 'connorholyday/vim-snazzy'
-" Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
-" Plug 'leafgarland/typescript-vim'
-" Plug 'peitalin/vim-jsx-typescript'
-"
-Plug 'maxmellon/vim-jsx-pretty'
-
-" html 补全
-Plug 'mattn/emmet-vim'
-
-" php 支持
-" Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' :['markdown', 'vim-plug'] }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-" 最近常打开文件
-Plug 'lvht/fzf-mru'
-
-" 打开会话，会有头牛
-Plug 'mhinz/vim-startify'
-
-" 搜索
-Plug 'mileszs/ack.vim'
-
-" 文本对齐插件
-Plug 'godlygeek/tabular'
-" markdown 插件
-Plug 'plasticboy/vim-markdown'
-" tab对齐线
-Plug 'Yggdroot/indentLine'
-
-" php补全插件。ycm对php补全并不友好
-" Plug 'phpvim/phpcd.vim', { 'for': 'php' }
-" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-" Plug 'vim-scripts/progressbar-widget' " 用来显示索引进度的插件
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" nginx高亮支持
-Plug 'chr4/nginx.vim'
-
-" coc插件
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" 模糊搜索
-Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
-
-" 注释插件
-Plug 'preservim/nerdcommenter'
-
-" xdebug调试
-" Plug 'brookhong/dbgpavim'
-Plug 'vim-vdebug/vdebug'
-
-" 格式化插件
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/0.x'
-  \ }
-
-" 多光标选择插件
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-" 🌈括号
-Plug 'luochen1990/rainbow'
-
-" tagbar 函数树
-Plug 'majutsushi/tagbar'
-
-" 全局搜搜
-Plug 'dyng/ctrlsf.vim'
-
+source ~/.config/nvim/src/PlugIn.vim
 call plug#end()
 
 let g:airline_theme='light'
@@ -240,8 +73,8 @@ map <LEADER>- :-tabnext<CR>
 map <LEADER>= :+tabnext<CR>
 
 " 复制到剪贴板
-nmap <c-v> "+gp
-nmap <c-c> "+y
+" nmap <c-v> "+gp
+" vmap <c-c> "+y
 
 " 刷新配置
 map R :source $MYVIMRC<CR>
@@ -321,64 +154,8 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-" cnoreabbrev Ack Ack!
-" nnoremap <Leader>f :Ack<space>-i<space>
-
 " fzf 搜索
-nmap <C-P> :Files<CR>
-
-" 过滤掉不必要的文件夹
-let $FZF_DEFAULT_COMMAND='find . \( -name .git -o -name .idea -o -name .vscode -o -name .sass-cache -o -name node_modules -o -name build -o -name public \) -prune -o -print'
-
-" 让输入上方，搜索列表在下方
-let $FZF_DEFAULT_OPTS = '--layout=reverse'
-
-" 打开 fzf 的方式选择 floating window 仅在最新版本（0.4以上版本）的nvim支持
-let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
-
-" 窗口浮动函数
-function! OpenFloatingWin()
-  let height = &lines - 3
-  let width = float2nr(&columns - (&columns * 2 / 10))
-  let col = float2nr((&columns - width) / 2)
-
-  " 设置浮动窗口打开的位置，大小等。
-  " 这里的大小配置可能不是那么的 flexible 有继续改进的空间
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': height * 0.3,
-        \ 'col': col + 30,
-        \ 'width': width * 2 / 3,
-        \ 'height': height / 2
-        \ }
-
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, opts)
-
-  " 设置浮动窗口高亮
-  call setwinvar(win, '&winhl', 'No<Plug>CtrlSFCwordPathrmal:Pmenu')
-
-  setlocal
-        \ buftype=nofile
-        \ bufhidden=hide
-        \ nobuflisted
-        \ nonumber
-        \ norelativenumber
-        \ signcolumn=no
-endfunction
-
-" you complete me
-" let g:ycm_autoclose_preview_window_after_completion=0
-" let g:ycm_autoclose_preview_window_after_insertion=1
-" let g:ycm_use_clangd = 0
-" let g:ycm_python_interpreter_path = "/usr/bin/python3"
-" let g:ycm_python_binary_path = "/usr/bin/python3"
-
-" phpcd 这对php的补全插件
-" autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-" autocmd FileType php set omnifunc=phpcomplete
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option('ignore_sources', {'php': ['phpcd', 'omni']})
+source ~/.config/nvim/src/plugConfig/FzfConfig.vim
 
 let g:phpcd_php_cli_executable = 'php7.3'
 
@@ -596,3 +373,8 @@ let g:ctrlsf_auto_preview = 1
 
 " 过滤掉文件夹
 let g:ctrlsf_ignore_dir = ['bower_components', 'vendor', 'runtime', 'node_module', 'dist']
+
+if (has('nvim'))
+  " gitleng 插件 nvim 独占
+  source ~/.config/nvim/src/plugConfig/blamer.vim
+endif
