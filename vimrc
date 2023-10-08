@@ -10,8 +10,8 @@ call plug#begin('~/.vim/plugged')
 source ~/.config/nvim/src/PlugIn.vim
 call plug#end()
 
-let g:airline_theme='light'
-let g:airline_powerline_fonts = 1
+" airline 配置
+source ~/.config/nvim/src/plugConfig/airline.vim
 
 " 主题
 color monokai
@@ -186,6 +186,7 @@ let g:coc_global_extensions = [
       \ 'coc-vetur',
       \ 'coc-spell-checker',
       \ 'coc-git',
+      \ 'coc-jest'
       \]
 
 " 'coc-emmet',
@@ -320,7 +321,7 @@ let g:prettier#autoformat_config_present = 1
 " let g:prettier#autoformat_config_files = [...]
 
 " 格式化快捷键
-nmap <Leader>F <Plug>(Prettier)
+nmap <Leader>f <Plug>(Prettier)
 "*********** coc Prettier ***************************"
 " vmap <leader>f  <Plug>(coc-format-selected)
 " nmap <leader>f :CocCommand prettier.formatFile <CR>
@@ -344,8 +345,8 @@ let g:VM_maps['Remove Region']      = 'q'
 let g:rainbow_active = 1
 
 "************* ctrlsf 全局搜索 ********************************"
-nmap <leader>f <Plug>CtrlSFPrompt
-nmap <leader>F :CtrlSFToggle<CR>
+nmap <leader>F <Plug>CtrlSFPrompt
+"nmap <leader>F :CtrlSFToggle<CR>
 vmap <leader>F <Plug>CtrlSFVwordExec
 " vmap <C-F>F <Plug>CtrlSFVwordExec
 nmap <C-F>n <Plug>CtrlSFCwordPath
