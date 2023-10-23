@@ -1,9 +1,14 @@
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'  " 导航条插件
+Plug 'vim-airline/vim-airline-themes' " 导航条配套主题
+
+" 目录树
 Plug 'preservim/nerdtree' | 
-  \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-  \ Plug 'ryanoasis/vim-devicons'
+  \ Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'ryanoasis/vim-devicons' " vim 图标
+
 Plug 'sickill/vim-monokai'
+
 Plug 'connorholyday/vim-snazzy'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
@@ -29,7 +34,7 @@ Plug 'lvht/fzf-mru'
 Plug 'mhinz/vim-startify'
 
 " 搜索
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 
 " 文本对齐插件
 Plug 'godlygeek/tabular'
@@ -61,10 +66,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'vim-vdebug/vdebug'
 
 " 格式化插件
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/0.x'
-  \ }
+Plug 'prettier/vim-prettier', {'do': 'yarn install --frozen-lockfile --production'}
 
 " 多光标选择插件
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -79,3 +81,4 @@ Plug 'dyng/ctrlsf.vim'
 
 " gitlens
 Plug 'APZelos/blamer.nvim'
+

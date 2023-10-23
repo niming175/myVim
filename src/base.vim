@@ -6,9 +6,6 @@ set nocompatible
 set cursorline " 光标线
 set showcmd
 
-" set cindent " 换行缩进
-" set si
-
 " 搜索
 set hlsearch
 exec "nohlsearch"
@@ -31,32 +28,30 @@ nmap - Nzz
 " 取消高亮
 noremap <LEADER><CR> :nohlsearch<CR>
 
+set tabstop=2 " tab键
+set shiftwidth=2 " 设置两个空格宽度
+set softtabstop=2
+set expandtab
+
 filetype on
-filetype indent on
-filetype plugin on
-filetype plugin indent on
+filetype plugin on " 允许加载文件类型插件
+filetype indent on " 允许vim为不同类型的文件定义不同的缩进格式
+
+au FileType php setlocal tabstop=4 " php 为4个缩进
+au FileType php setlocal shiftwidth=4
+au FileType php setlocal softtabstop=4
+
+set autoindent  " 设置为自动缩进
+set smartindent  " 设置只能缩进
+set cindent     " c语言自动缩进
+" set noautoindent " 禁用自动缩进
+" set nosmartindent " 禁用智能缩进
 
 syntax on " 自动语法高亮
 
 let &t_ut=''
 
 set number
-
-set tabstop=2 " tab键
-set shiftwidth=2 " 设置两个空格宽度
-set softtabstop=2
-
-au FileType php setlocal tabstop=4 " php 为4个缩进
-au FileType php setlocal shiftwidth=4
-au FileType php setlocal softtabstop=4
-" set autoindent  " 设置为自动缩进
-set expandtab
-
-" 文本缩进
-" nmap <tab> V>
-" nmap <s-tab> V<
-vmap <tab> >gv
-vmap <s-tab> <gv
 
 " 显示不可见字符
 set list
@@ -88,5 +83,4 @@ set laststatus=2
 
 " 打开文件后恢复关闭前所在的位置
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
 

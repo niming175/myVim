@@ -1,177 +1,69 @@
 " 领导键
 let mapleader=' '
+" 配置文件基本路径
+if has('nvim')
+  let g:configPath = expand('~/.config/nvim/')
+else
+  let g:configPath = expand('~/.vim/')
+endif
 
-" 基本配置
-source ~/.config/nvim/src/base.vim
+" 函数，加载文件
+function! SourceFIle(filename)
+  let filePath = g:configPath . a:filename
+
+  " 加载
+  execute 'source ' . filePath
+endfunction
 
 " 插件
 " call plug#begin()
-call plug#begin('~/.vim/plugged')
-source ~/.config/nvim/src/PlugIn.vim
+call plug#begin(configPath . 'plugged')
+  call SourceFIle('src/PlugIn.vim')
 call plug#end()
 
+" 基本配置
+call SourceFIle('src/base.vim')
+
+" 主题颜色
+call SourceFIle('src/theme.vim')
+
+" 操作配置，如快捷绑定
+call SourceFIle('src/operation.vim')
+
+" vim 字体图标配置
+call SourceFIle('src/plugConfig/webdevicons.vim')
+
 " airline 配置
-source ~/.config/nvim/src/plugConfig/airline.vim
+call SourceFIle('src/plugConfig/airline.vim')
 
-" 主题
-color monokai
+" nerdtree 目录树配置
+call SourceFIle('src/plugConfig/nerdtree.vim')
 
-" 设置提示窗口主题
-hi Pmenu ctermfg=249 ctermbg=239 cterm=NONE guifg=NONE guibg=NONE gui=NONE
-" 注释颜色
-hi Comment ctermfg=249
+" markdown preview
+call SourceFIle('src/plugConfig/markdown_preview.vim')
 
-let g:SnazzyTransparent = 1
+" emmet
+call SourceFIle('src/plugConfig/emmet.vim')
 
-" 鼠标操作
-set mouse=a
+" vim prettier 格式化
+call SourceFIle('src/plugConfig/vim_prettier.vim')
 
-" 鼠标选择
-if has( 'mouse' )
-  set mouse-=a
-endif
+" ctrlsf 全局关键搜索
+call SourceFIle('src/plugConfig/ctrlsf.vim')
 
+" fzf 搜索
+call SourceFIle('src/plugConfig/FzfConfig.vim')
 
-" 行移动
-nnoremap <M-up> :m .-2<CR>==
-nnoremap <M-down> :m .+1<CR>==
-inoremap <M-up> <Esc>:m .-2<CR>==gi
-inoremap <M-down> <Esc>:m .+1<CR>==gi
-vnoremap <M-up> :m '<-2<CR>gv=gv
-vnoremap <M-down> :m '>+1<CR>gv=gv
-
-" 保存快捷键
-inoremap <C-S> <Esc>:w<CR>li
-nnoremap <C-S> :w<CR>
-inoremap <C-Z> <Esc>uli
-
-" 跳到单词前后
-map <C-LEFT> b
-map <C-RIGHT> w
-
-" 分屏
-map sl :set splitright<CR>:vsplit<CR>
-map sh :set nosplitright<CR>:vsplit<CR>
-map sk :set nosplitbelow<CR>:split<CR>
-map sj :set splitbelow<CR>:split<CR>
-
-" 切换分屏
-map <LEADER>l <C-w>l
-map <LEADER>k <C-w>k
-map <LEADER>h <C-w>h
-map <LEADER>j <C-w>j
-
-" 改变分屏大小
-map <LEADER><up> :res +3<CR>
-map <LEADER><down> :res -3<CR>
-map <LEADER><right> :vertical resize-3<CR>
-map <LEADER><left> :vertical resize+3<CR>
-
-" 设置tab
-map <LEADER>t :tabe<CR>
-map <LEADER>- :-tabnext<CR>
-map <LEADER>= :+tabnext<CR>
-
-" 复制到剪贴板
-" nmap <c-v> "+gp
-" vmap <c-c> "+y
-
-" 刷新配置
-map R :source $MYVIMRC<CR>
-" 大写S对应保存
-map S :w<CR>
-" 大写Q对应退出
-map Q :q<CR>
-
-" 插件快捷键
-
-" NERDTree 目录树插件配置
-map <LEADER>b :NERDTreeToggle<CR>
-map <LEADER>n :NERDTreeFind<CR>
-
-" 默认打开vim 时展开目录树，并聚焦在其他窗口
-" autocmd VimEnter * NERDTree | wincmd p
-
-" 状态图标
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
-
-let g:NERDTreeGitStatusUseNerdFonts = 1
-" 隐藏中括号
-let g:NERDTreeGitStatusConcealBrackets = 1
-
-let g:webdevicons_enable_airline_tabline = 1
-
-" jsx 插件支持
-" let g:javascript_plugin_jsdoc=1
-" let g:jsx_ext_required = 1
-
-" markdown 插件
-autocmd Filetype markdown map <LEADER>m :MarkdownPreview <CR>
-" 禁用markdown代码框符号的隐藏
-let g:vim_markdown_conceal_code_blocks = 0
-" 禁用符号隐藏
-let g:vim_markdown_conceal = 0
-
-" ---------------------- Markdown Preview 插件 ----------------------
-let g:mkdp_open_to_the_world = 1
-" makrdown预览插件，默认开启端口
-let g:mkdp_open_ip = '127.0.0.1'
-let g:mkdp_port = '8081'
-" function! g:Open_browser(url)
-"     silent exe '!lemonade open 'a:url
-" endfunction
-" let g:mkdp_browserfunc = 'g:Open_browser'
-
-" 文件查找插件
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-
-" 文件查找插件查找模式
-" let g:ctrlp_working_path_mode = 'ra'
-
-" 忽略的文件
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|vendor|node_modules)$',
-"   \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-"   \ }
 " fzf_mru 最近常打开文件
 let g:fzf_mru_file_list_size = 10
 let g:fzf_mru_ignore_patterns = 'fugitive\|\.git/\|\_^/tmp/'
 
-" 单词搜索
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
-
-" fzf 搜索
-source ~/.config/nvim/src/plugConfig/FzfConfig.vim
-
-let g:phpcd_php_cli_executable = 'php7.3'
-
-" emmet 插件
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,js,vue,jsx,javascript,php EmmetInstall
-let g:user_emmet_mode='a'  " 在所有模式下开启
-let g:user_emmet_leader_key='<C-E>'
+let g:phpcd_php_cli_executable = 'php7.4'
 
 " 缩进线indentline 插件设置
-let g:indentLine_color_term = 243
-let g:indentLine_char = '┊'
-
-" 设置json时不显示缩进线
-autocmd FileType json,markdown let g:indentLine_conceallevel=0
-autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel=2
+if isdirectory(expand('~/myVim/vim/plugged/indentLine'))
+  call SourceFIle('src/plugConfig/indent_line.vim')
+endif
 
 " coc 插件
 let g:coc_global_extensions = [
@@ -186,7 +78,9 @@ let g:coc_global_extensions = [
       \ 'coc-vetur',
       \ 'coc-spell-checker',
       \ 'coc-git',
-      \ 'coc-jest'
+      \ 'coc-jest',
+      \ 'coc-blade',
+      \ '@yaegassy/coc-tailwindcss3'
       \]
 
 " 'coc-emmet',
@@ -227,6 +121,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+
 " 查看文档 主键 + H
 nnoremap <silent> <LEADER>H :call <SID>show_documentation()<CR>
 
@@ -240,12 +135,6 @@ endfunction
 
 " 相同词高亮
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Formatting selected code.
-" 选中代码格式化
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-vmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -309,23 +198,6 @@ let g:vdebug_options.port = 9000
 let g:vdebug_options.path_maps = { "/var/www": "/Volumes/Document/www" }
 let g:vdebug_options.break_on_open = 0
 
-"""""""""""""""""""" vim prettier config """""""""""""""""""""""
-" 当存在@format或@prettier时自动格式化
-let g:prettier#autoformat = 1
-
-" 根据当前目录或任何父目录中找到配置文件来切换g:prettier#autoformat 设置。
-" 请注意，这将覆盖 g:prettier#autoformat设置！
-let g:prettier#autoformat_config_present = 1
-
-" 格式化配置文件
-" let g:prettier#autoformat_config_files = [...]
-
-" 格式化快捷键
-nmap <Leader>f <Plug>(Prettier)
-"*********** coc Prettier ***************************"
-" vmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f :CocCommand prettier.formatFile <CR>
-
 "*********** vim-visual-multi 多光标配置 *******************"
 let g:VM_theme                      = 'ocean'
 let g:VM_highlight_matches          = 'red'
@@ -344,38 +216,8 @@ let g:VM_maps['Remove Region']      = 'q'
 "************* 彩虹括号 ***************************************"
 let g:rainbow_active = 1
 
-"************* ctrlsf 全局搜索 ********************************"
-nmap <leader>F <Plug>CtrlSFPrompt
-"nmap <leader>F :CtrlSFToggle<CR>
-vmap <leader>F <Plug>CtrlSFVwordExec
-" vmap <C-F>F <Plug>CtrlSFVwordExec
-nmap <C-F>n <Plug>CtrlSFCwordPath
-
-" 搜索类型 compact 紧凑 | normal 自然
-let g:ctrlsf_default_view_mode = 'compact'
-let g:ctrlsf_search_mode = 'async'
-" 结果位置, 搜索类型compact 时有效
-let g:ctrlsf_position = 'left_local'
-" 搜索位置
-let g:ctrlsf_compact_position = 'bottom_outside'
-
-" 打开文件后，是否关闭CtrlSF
-let g:ctrlsf_auto_close = {
-    \"normal" : 0,
-    \"compact": 1
-    \}
-
-" 聚焦
-let g:ctrlsf_auto_focus = {
-    \ "at": "start"
-    \ }
-
-let g:ctrlsf_auto_preview = 1
-
-" 过滤掉文件夹
-let g:ctrlsf_ignore_dir = ['bower_components', 'vendor', 'runtime', 'node_module', 'dist']
-
 if (has('nvim'))
   " gitleng 插件 nvim 独占
   source ~/.config/nvim/src/plugConfig/blamer.vim
 endif
+
