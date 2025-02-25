@@ -1,18 +1,17 @@
 " 领导键
 let mapleader=' '
+
 " 配置文件基本路径
 if has('nvim')
-  let g:configPath = expand('~/.config/nvim/')
+  let configPath = expand('~/.config/nvim/')
 else
-  let g:configPath = expand('~/.vim/')
+  let configPath = expand('~/.vim/')
 endif
 
 " 函数，加载文件
 function! SourceFIle(filename)
-  let filePath = g:configPath . a:filename
-
   " 加载
-  execute 'source ' . filePath
+  execute 'source' . g:configPath . a:filename
 endfunction
 
 " 插件
@@ -55,15 +54,13 @@ call SourceFIle('src/plugConfig/ctrlsf.vim')
 call SourceFIle('src/plugConfig/FzfConfig.vim')
 
 " fzf_mru 最近常打开文件
-let g:fzf_mru_file_list_size = 10
-let g:fzf_mru_ignore_patterns = 'fugitive\|\.git/\|\_^/tmp/'
+" let g:fzf_mru_file_list_size = 10
+" let g:fzf_mru_ignore_patterns = 'fugitive\|\.git/\|\_^/tmp/'
 
 let g:phpcd_php_cli_executable = 'php7.4'
 
 " 缩进线indentline 插件设置
-if isdirectory(expand('~/myVim/vim/plugged/indentLine'))
-  call SourceFIle('src/plugConfig/indent_line.vim')
-endif
+call SourceFIle('src/plugConfig/indent_line.vim')
 
 " coc 插件
 let g:coc_global_extensions = [
@@ -220,4 +217,19 @@ if (has('nvim'))
   " gitleng 插件 nvim 独占
   source ~/.config/nvim/src/plugConfig/blamer.vim
 endif
+
+
+" Copilot
+" 自定义 Copilot 快捷键
+
+" 设置 Tab 接受提示
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
+" 接受补全提示的单词
+imap <C-Right> <Plug>(copilot-accept-word)
+
+" 设置切换建议快捷键
+imap <silent><script><expr> <C-n> copilot#Next()
+imap <silent><script><expr> <C-p> copilot#Previous()
 

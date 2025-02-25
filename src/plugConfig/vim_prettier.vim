@@ -13,4 +13,6 @@ let g:prettier#autoformat_config_present = 1
 " 格式化配置文件
 " let g:prettier#autoformat_config_files = [...]
 
+au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
+
 

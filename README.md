@@ -76,12 +76,13 @@ ln -s vimrc ~/.config/nvim/init.vim
 这个有点类似`vscode`的`ctrl` + `d`。按住`shift` + 左右键，选择单词，然后`ctrl` + `d`, 选中上下文多个相同单词，最后输入`i`进行编辑修改; 没有选择关键字，直接`ctrl` + `d`, 默认选中当前光标的单词
 > 这种模式下的自动补全可能不是很好用；退出此模式，要双击`esc`键
 
-### 未来计划
-- 整个工程目录下搜索，像`vscode` 的`ctrl` + `shift` + `f`;
-- <s>优化：文件查找排除`node_modules`，`dist`等文件夹;</s>
+2、工作个目录搜索
+> `Shift` + `Leader` + `f` 会在当前目录下搜索文件，输入关键字，回车，会在当前目录下搜索文件，回车打开文件
 
-
-
-
-
-
+3、接入github copilot 代码AI补全
+- 执行`:Copilot setup` 登录github账号，获取token
+- 常用快捷键：
+    - `Ctrl` + `j` 使用该提示
+    - `Ctrl` + `Right` 逐个单词补全
+    - `meta(alt)` + `[` 上一个提示
+    - `meta(alt)` + `]` 下一个提示

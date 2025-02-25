@@ -15,7 +15,7 @@ Plug 'connorholyday/vim-snazzy'
 " Plug 'leafgarland/typescript-vim'
 " Plug 'peitalin/vim-jsx-typescript'
 "
-Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'maxmellon/vim-jsx-pretty'
 
 " html 补全
 Plug 'mattn/emmet-vim'
@@ -23,7 +23,8 @@ Plug 'mattn/emmet-vim'
 " php 支持
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' :['markdown', 'vim-plug'] }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -66,7 +67,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'vim-vdebug/vdebug'
 
 " 格式化插件
-Plug 'prettier/vim-prettier', {'do': 'yarn install --frozen-lockfile --production'}
+Plug 'prettier/vim-prettier', {
+    \ 'do': 'yarn install --frozen-lockfile --production',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
 " 多光标选择插件
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -81,4 +84,10 @@ Plug 'dyng/ctrlsf.vim'
 
 " gitlens
 Plug 'APZelos/blamer.nvim'
+
+" mdx support
+Plug 'jxnblk/vim-mdx-js'
+
+" AI 代码补全
+Plug 'github/copilot.vim'
 
