@@ -1,3 +1,8 @@
+let s:vimrc_dir = stdpath('config')
+let s:plug_dir = s:vimrc_dir . '/plugged'
+
+call plug#begin(s:plug_dir)
+
 Plug 'vim-airline/vim-airline'  " 导航条插件
 Plug 'vim-airline/vim-airline-themes' " 导航条配套主题
 
@@ -89,5 +94,8 @@ Plug 'APZelos/blamer.nvim'
 Plug 'jxnblk/vim-mdx-js'
 
 " AI 代码补全
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim' 这个要收费
 
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+
+call plug#end()

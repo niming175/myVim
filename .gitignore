@@ -1,2 +1,3 @@
 /.vim/
-/vim/plugged/
+plugged/
+.DS_Store

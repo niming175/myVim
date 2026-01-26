@@ -1,5 +1,7 @@
 # myVim
 
+这个是我自己的`neovim`配置，集成了平时编程用到的大部分插件，可以向vscode那样方便使用。
+
 ### 我的vim配置
 - 集成[vim-plug](https://github.com/junegunn/vim-plug)管理插件；
 - coc.nvim 子插件管理
@@ -11,6 +13,7 @@
 - 支持spell check 单词检查
 - 支持js，php 错误检查
 - 支持当前文件函数目录
+- 支持AI代码补全
 
 ### 环境要求
 - neovim >= 0.4.0
@@ -18,15 +21,17 @@
 - vim >= 8.1.1
 
 ### 安装
+
+推荐使用`neovim`, 传统`vim`兼容并不是很友好
+
 ```bash
 # 软连接文件和配置,假设工程目录在家目录下
 # vim
 ln -s ~/myVim/vimrc ~/.vimrc
-ln -s ~/myVim/.vim ~/.vim
+ln -s ~/myVim ~/.vim
 
 # neo-vim
-ln -s vim ~/.config/nvim
-ln -s vimrc ~/.config/nvim/init.vim
+ln -s ~/myVim ~/.config/nvim
 
 # 安装
 # 1、打开vim 敲入命令
@@ -79,10 +84,18 @@ ln -s vimrc ~/.config/nvim/init.vim
 2、工作个目录搜索
 > `Shift` + `Leader` + `f` 会在当前目录下搜索文件，输入关键字，回车，会在当前目录下搜索文件，回车打开文件
 
-3、接入github copilot 代码AI补全
-- 执行`:Copilot setup` 登录github账号，获取token
-- 常用快捷键：
-    - `Ctrl` + `j` 使用该提示
-    - `Ctrl` + `Right` 逐个单词补全
-    - `meta(alt)` + `[` 上一个提示
-    - `meta(alt)` + `]` 下一个提示
+3、接入codeium Ai 提示 
+> 原先使用的copilot免费次数使用完后，是要收费的，改用codeium
+- 参考文档 https://github.com/JohnRigoni/codeium.vim
+- 快速使用：
+    - vim 中执行命令`:Codeium Auth`, 会打开浏览器授权
+- 已绑定的快捷键  
+
+|功能|快捷键|说明|
+|-|-|-|
+|接受补全提示|`ctrl` + `j`||
+|补全下个单词|`ctrl` + `l`|提示很长时，前面部分可能是自己想要的，后面却不是，这个补全就用得上了|
+|接受补全下一行|`ctrl` + `L`|适用于有很多个行的补全|
+|下一个建议|`ctrl` + `n`|当前的建议不喜欢的时候，可以换下一个|
+|上一个建议|`ctrl` + `p`||
+|取消当前的补全|`ctrl` + `k`|有时候可能觉得补全不准又很烦，就先取消啦|

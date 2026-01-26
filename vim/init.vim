@@ -1,1 +1,0 @@
-/Users/niming175/myVim/vimrc

@@ -1,43 +1,38 @@
 {
-  "coc.preferences.extensionUpdateCheck": "never",
-  "suggest.noselect": true,
-  "suggest.enablePreselect": false,
   "eslint.enable": true,
-  "eslint.run": "onType", // 在保存的时候检查esline
-  "eslint.autoFixOnSave": false, // 在保存的时候修复错误
-  // 显示esline文档
+  "eslint.run": "onType",
+  "eslint.autoFixOnSave": false,
   "eslint.codeAction.showDocumentation": {
     "enable": true
   },
-  // 自动格式化
-  // "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "js", "jsx", "javascriptreact", "javascript", "typescript", "typescriptreact", "vue"],
   "suggest.completionItemKindLabels": {
-		"class": "类",
-		"color": "颜",
-		"constant": "\uf8fe",
-		"default": "默",
-		"enum": "\uf435",
-		"enumMember": "\uf02b",
-		"event": "\ufacd",
-		"field": "\uf93d",
-		"file": "\uf723",
-		"folder": "\uf115",
-		"function": "函",
-		"interface": "\uf417",
-		"keyword": "\uf1de",
-		"method": "\uf6a6",
-		"module": "\uf40d",
-		"operator": "\uf915",
-		"property": "\ue624",
-		"reference": "\ufa46",
-		"snippet": "\ue60b",
-		"struct": "\ufb44",
-		"text": "\ue612",
-		"typeParameter": "\uf728",
-		"unit": "\uf475",
-		"value": "值",
-		"variable": "\ue71b"
-	},
+    "class": "类",
+    "color": "颜",
+    "constant": "\uf8fe",
+    "default": "默",
+    "enum": "\uf435",
+    "enumMember": "\uf02b",
+    "event": "\ufacd",
+    "field": "\uf93d",
+    "file": "\uf723",
+    "folder": "\uf115",
+    "function": "函",
+    "interface": "\uf417",
+    "keyword": "\uf1de",
+    "method": "\uf6a6",
+    "module": "\uf40d",
+    "operator": "\uf915",
+    "property": "\ue624",
+    "reference": "\ufa46",
+    "snippet": "\ue60b",
+    "struct": "\ufb44",
+    "text": "\ue612",
+    "typeParameter": "\uf728",
+    "unit": "\uf475",
+    "value": "值",
+    "variable": "\ue71b"
+  },
+  "coc.preferences.formatOnSave": false,
   "coc.preferences.colorSupport": true,
   "javascript.format.enabled": true,
   "cSpell.userWords": [
@@ -47,11 +42,14 @@
     "PAYPAL",
     "REFUNED",
     "Srmklive",
+    "Vuex",
     "aggs",
     "apiclient",
     "clsx",
     "endcomponent",
+    "endphp",
     "endsection",
+    "iife",
     "laravel",
     "mygroup",
     "phpls",
@@ -89,10 +87,20 @@
     "**/*.dll" // Ignore all .dll files
   ],
   "emmet.includeLanguages": {
-    "vue-html": "html", 
+    "vue-html": "html",
     "javascript": "javascriptreact"
   },
   "prettier.enable": true,
   "tailwindCSS.emmetCompletions": true,
-  "tailwindCSS.headwind.runOnSave": false
+  "tailwindCSS.headwind.runOnSave": false,
+  "json": {
+    "enable": true,
+    "validate": {
+      "enable": true
+    },
+    "format": {
+      "enable": false,
+      "keepLines": true
+    }
+  }
 }

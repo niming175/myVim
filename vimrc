@@ -8,50 +8,56 @@ else
   let configPath = expand('~/.vim/')
 endif
 
+" vimrc 文件路径
+let s:vimrc_dir = expand('<sfile>:p:h')
+
+" 基础配置
+execute 'source ' . s:vimrc_dir . '/src/base.vim'
+
+" 插件
+execute 'source ' . s:vimrc_dir . '/src/Plugin.vim'
+
 " 函数，加载文件
 function! SourceFIle(filename)
   " 加载
-  execute 'source' . g:configPath . a:filename
+  execute 'source ' . s:vimrc_dir . a:filename
 endfunction
 
-" 插件
-" call plug#begin()
-call plug#begin(configPath . 'plugged')
-  call SourceFIle('src/PlugIn.vim')
-call plug#end()
-
 " 基本配置
-call SourceFIle('src/base.vim')
+" call SourceFIle('src/base.vim')
 
 " 主题颜色
-call SourceFIle('src/theme.vim')
+call SourceFIle('/src/theme.vim')
 
 " 操作配置，如快捷绑定
-call SourceFIle('src/operation.vim')
+call SourceFIle('/src/operation.vim')
 
 " vim 字体图标配置
-call SourceFIle('src/plugConfig/webdevicons.vim')
+call SourceFIle('/src/plugConfig/webdevicons.vim')
 
 " airline 配置
-call SourceFIle('src/plugConfig/airline.vim')
+call SourceFIle('/src/plugConfig/airline.vim')
 
 " nerdtree 目录树配置
-call SourceFIle('src/plugConfig/nerdtree.vim')
+call SourceFIle('/src/plugConfig/nerdtree.vim')
 
 " markdown preview
-call SourceFIle('src/plugConfig/markdown_preview.vim')
+call SourceFIle('/src/plugConfig/markdown_preview.vim')
 
 " emmet
-call SourceFIle('src/plugConfig/emmet.vim')
+call SourceFIle('/src/plugConfig/emmet.vim')
 
 " vim prettier 格式化
-call SourceFIle('src/plugConfig/vim_prettier.vim')
+call SourceFIle('/src/plugConfig/vim_prettier.vim')
 
 " ctrlsf 全局关键搜索
-call SourceFIle('src/plugConfig/ctrlsf.vim')
+call SourceFIle('/src/plugConfig/ctrlsf.vim')
 
 " fzf 搜索
-call SourceFIle('src/plugConfig/FzfConfig.vim')
+call SourceFIle('/src/plugConfig/FzfConfig.vim')
+
+" Ai 代码补全
+call SourceFIle('/src/plugConfig/codeium.vim')
 
 " fzf_mru 最近常打开文件
 " let g:fzf_mru_file_list_size = 10
@@ -60,7 +66,7 @@ call SourceFIle('src/plugConfig/FzfConfig.vim')
 let g:phpcd_php_cli_executable = 'php7.4'
 
 " 缩进线indentline 插件设置
-call SourceFIle('src/plugConfig/indent_line.vim')
+call SourceFIle('/src/plugConfig/indent_line.vim')
 
 " coc 插件
 let g:coc_global_extensions = [
@@ -218,18 +224,17 @@ if (has('nvim'))
   source ~/.config/nvim/src/plugConfig/blamer.vim
 endif
 
-
 " Copilot
 " 自定义 Copilot 快捷键
 
 " 设置 Tab 接受提示
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
+" imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+" let g:copilot_no_tab_map = v:true
 
 " 接受补全提示的单词
-imap <C-Right> <Plug>(copilot-accept-word)
+" imap <C-Right> <Plug>(copilot-accept-word)
 
 " 设置切换建议快捷键
-imap <silent><script><expr> <C-n> copilot#Next()
-imap <silent><script><expr> <C-p> copilot#Previous()
+" imap <silent><script><expr> <C-n> copilot#Next()
+" imap <silent><script><expr> <C-p> copilot#Previous()
 

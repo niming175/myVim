@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/Volumes/Document'
+let g:netrw_dirhist_1='/Volumes/Document/www'
+let g:netrw_dirhist_0='/Volumes/Document/www/wordpress2'
+let g:netrw_dirhist_9='/Volumes/Document/www/laradock/data/mysql/s7_wp'
+let g:netrw_dirhist_8='/Volumes'
+let g:netrw_dirhist_7='/Volumes/Document'
+let g:netrw_dirhist_6='/Volumes/Document/www'
+let g:netrw_dirhist_5='/Volumes/Document/www/laradock2'
+let g:netrw_dirhist_4='/Volumes/Document/www/laradock2/workspace'
+let g:netrw_dirhist_3='/Volumes/Document/www/with-blade/packages/utils'
