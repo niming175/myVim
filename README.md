@@ -74,17 +74,19 @@ ln -s ~/myVim ~/.config/nvim
 |函数跳转|`ctrl` + `b` + `b`|如果函数在其他文件，会新开tab|
 |注释|`ctrl` + `c`|注释与取消注释|
 
-**其他**
+---
 
-1、选中多行编辑
+### 功能:
+
+**1、选中多行编辑**
 
 这个有点类似`vscode`的`ctrl` + `d`。按住`shift` + 左右键，选择单词，然后`ctrl` + `d`, 选中上下文多个相同单词，最后输入`i`进行编辑修改; 没有选择关键字，直接`ctrl` + `d`, 默认选中当前光标的单词
 > 这种模式下的自动补全可能不是很好用；退出此模式，要双击`esc`键
 
-2、工作个目录搜索
+**2、工作个目录搜索**
 > `Shift` + `Leader` + `f` 会在当前目录下搜索文件，输入关键字，回车，会在当前目录下搜索文件，回车打开文件
 
-3、接入codeium Ai 提示 
+**3、接入codeium Ai 提示**
 > 原先使用的copilot免费次数使用完后，是要收费的，改用codeium
 - 参考文档 https://github.com/JohnRigoni/codeium.vim
 - 快速使用：
@@ -100,12 +102,13 @@ ln -s ~/myVim ~/.config/nvim
 |上一个建议|`ctrl` + `p`||
 |取消当前的补全|`ctrl` + `k`|有时候可能觉得补全不准又很烦，就先取消啦|
 
-4、代码编辑风格维护
+**4、代码编辑风格维护**
+
 如果一个项目是多人维护的话，需要一个统一的编码风格，比如js 的tab 是2个空格宽度，而后端的是4个空格宽度。那为了统一风格，这时候需要有个配制文件来约束这个风格。  
 
 这里用的插件是[editorconfig/editorconfig-vim](https://github.com/editorconfig/editorconfig-vim); 需要在项目的根目录加个配制文件：`.editorconfig`，内容大致：
 
-```config
+```editorconfig
 root = true # 表示这是当前项目的根配置文件，编辑器向上查找时会停止。
 
 # 全局设置
