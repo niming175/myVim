@@ -23,9 +23,6 @@ function! SourceFIle(filename)
   execute 'source ' . s:vimrc_dir . a:filename
 endfunction
 
-" 基本配置
-" call SourceFIle('src/base.vim')
-
 " 主题颜色
 call SourceFIle('/src/theme.vim')
 
@@ -182,7 +179,6 @@ vmap <C-c>   <Plug>NERDCommenterToggle<CR>gv
 
 " coc-highlight
 autocmd CursorHold * silent call CocActionAsync('highlight')
-" set termguicolors
 
 imap <C-x> <Esc>:wq<CR>
 
@@ -217,7 +213,7 @@ let g:VM_maps['Add Cursor Down']    = '<C-Down>'
 let g:VM_maps['Remove Region']      = 'q'
 
 "************* 彩虹括号 ***************************************"
-let g:rainbow_active = 1
+call SourceFIle('/src/plugConfig/rainbow.vim')
 
 if (has('nvim'))
   " gitleng 插件 nvim 独占

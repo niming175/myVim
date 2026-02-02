@@ -41,8 +41,8 @@ map <LEADER>j <C-w>j
 " 改变分屏大小
 map <LEADER><up> :res +3<CR>
 map <LEADER><down> :res -3<CR>
-map <LEADER><right> :vertical resize-3<CR>
-map <LEADER><left> :vertical resize+3<CR>
+" map <LEADER><right> :vertical resize-3<CR>
+" map <LEADER><left> :vertical resize+3<CR>
 
 " 设置tab
 map <LEADER>t :tabe<CR>
@@ -68,4 +68,8 @@ map R :source $MYVIMRC<CR>
 map S :w<CR>
 " 大写Q对应退出
 map Q :q<CR>
+
+" 缓冲区切换
+map <leader><Right> :bnext<CR>
+map <leader><Left> :bprevious<CR>
 

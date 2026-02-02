@@ -33,9 +33,9 @@ set shiftwidth=2 " 设置两个空格宽度
 set softtabstop=2
 set expandtab
 
-filetype on
-filetype plugin on " 允许加载文件类型插件
-filetype indent on " 允许vim为不同类型的文件定义不同的缩进格式
+" filetype plugin on 允许加载文件类型插件
+" filetype indent on 允许vim为不同类型的文件定义不同的缩进格式
+filetype plugin indent on
 
 au FileType php setlocal tabstop=4 " php 为4个缩进
 au FileType php setlocal shiftwidth=4
@@ -83,4 +83,10 @@ set laststatus=2
 
 " 打开文件后恢复关闭前所在的位置
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" 快捷键绑定
+" 取消原有历史命令的快捷键，改为其他按钮
+nnoremap q: <Nop>
+" 改用领导键 + : 打开
+nnoremap <leader>: q:
 
