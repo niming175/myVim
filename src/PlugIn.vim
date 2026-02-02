@@ -98,4 +98,7 @@ Plug 'jxnblk/vim-mdx-js'
 
 Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
+" 代码编辑风格维护标准
+Plug 'editorconfig/editorconfig-vim'
+
 call plug#end()

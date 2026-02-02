@@ -99,3 +99,29 @@ ln -s ~/myVim ~/.config/nvim
 |下一个建议|`ctrl` + `n`|当前的建议不喜欢的时候，可以换下一个|
 |上一个建议|`ctrl` + `p`||
 |取消当前的补全|`ctrl` + `k`|有时候可能觉得补全不准又很烦，就先取消啦|
+
+4、代码编辑风格维护
+如果一个项目是多人维护的话，需要一个统一的编码风格，比如js 的tab 是2个空格宽度，而后端的是4个空格宽度。那为了统一风格，这时候需要有个配制文件来约束这个风格。  
+
+这里用的插件是[editorconfig/editorconfig-vim](https://github.com/editorconfig/editorconfig-vim); 需要在项目的根目录加个配制文件：`.editorconfig`，内容大致：
+
+```config
+root = true # 表示这是当前项目的根配置文件，编辑器向上查找时会停止。
+
+# 全局设置
+[*]
+charset = utf-8 # 使用 UTF-8 编码
+end_of_line = lf # 统一使用 LF 换行符 (Unix/macOS 风格)
+indent_style = space # 使用空格缩进
+indent_size = 4 # 使用 4 个空格缩进
+trim_trailing_whitespace = true # 自动移除所有行尾多余的空格
+insert_final_newline = true # 所有文件末尾都插入一个空行
+
+# 前端编码风格
+[*.{js,ts,jsx,tsx,json,vue,css,scss,html}]
+indent_style = space
+indent_size = 2
+
+```
+
+更多配制：[editorconfig](https://editorconfig.org/)
