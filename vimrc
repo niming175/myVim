@@ -45,7 +45,7 @@ call SourceFIle('/src/plugConfig/markdown_preview.vim')
 call SourceFIle('/src/plugConfig/emmet.vim')
 
 " vim prettier 格式化
-call SourceFIle('/src/plugConfig/vim_prettier.vim')
+" call SourceFIle('/src/plugConfig/vim_prettier.vim')
 
 " ctrlsf 全局关键搜索
 call SourceFIle('/src/plugConfig/ctrlsf.vim')
@@ -80,12 +80,15 @@ let g:coc_global_extensions = [
       \ 'coc-git',
       \ 'coc-jest',
       \ 'coc-blade',
-      \ '@yaegassy/coc-tailwindcss3'
+      \ '@yaegassy/coc-tailwindcss3',
+      \ 'coc-prettier'
       \]
 
+" coc 弹窗边框使用圆角字符
+let g:coc_borderchars = ['─', '│', '─', '│', '╭', '╮', '╯', '╰']
+
 " 'coc-emmet',
-" 'coc-prettier'
-" set signcolumn=no
+" " set signcolumn=no
 
 " 按tab补全，ycm有已经自带了这个设置，如果有开启ycm可以不设置以下
 inoremap <silent><expr> <TAB>
@@ -115,8 +118,8 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " 查找上下文定义的函数
 " nmap <silent> <C-b> :tabe<cr><Plug>(coc-definition)
-" 以新页面打开定义的函数
-nmap <silent> <C-b> :call CocAction('jumpDefinition', 'tab drop')<CR>
+" 在当前页面打开定义的函数
+nmap <silent> <C-b> <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -143,6 +146,9 @@ augroup mygroup
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+" 添加 :Format 命令以格式化当前缓冲区
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph

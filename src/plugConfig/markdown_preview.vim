@@ -1,5 +1,5 @@
 " markdown 插件
-" https://github.com/iamcco/markdown-preview.nvim
+" https://github.com/sammaji/markdown-preview.nvim
 
 " 主题色
 let g:mkdp_theme = 'light'
@@ -16,6 +16,9 @@ let g:mkdp_open_to_the_world = 1
 " makrdown预览插件，默认开启端口
 let g:mkdp_open_ip = '127.0.0.1'
 let g:mkdp_port = '8081'
+
+" 启动预览时在命令行回显预览 URL 及端口
+let g:mkdp_echo_preview_url = 1
 
 let g:mkdp_filetypes = ['markdown']
 

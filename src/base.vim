@@ -37,13 +37,27 @@ set expandtab
 " filetype indent on 允许vim为不同类型的文件定义不同的缩进格式
 filetype plugin indent on
 
+" 自动判断文件类型
+autocmd BufRead,BufNewFile *.liquid set filetype=liquid
+
 au FileType php setlocal tabstop=4 " php 为4个缩进
 au FileType php setlocal shiftwidth=4
 au FileType php setlocal softtabstop=4
 
+" 针对liquid文件注释的补丁
+augroup liquid_fix
+  autocmd!
+  autocmd FileType liquid syntax region liquidComment
+        \ start=+{%\s*comment\s*%}+
+        \ end=+{%\s*endcomment\s*%}+
+        \ contains=@Spell
+augroup END
+
+highlight link liquidComment Comment
+
 set autoindent  " 设置为自动缩进
-set smartindent  " 设置只能缩进
-set cindent     " c语言自动缩进
+set smartindent  " 设置智能缩进
+" set cindent     " c语言自动缩进
 " set noautoindent " 禁用自动缩进
 " set nosmartindent " 禁用智能缩进
 

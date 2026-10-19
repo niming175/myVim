@@ -48,6 +48,7 @@ map <LEADER><down> :res -3<CR>
 map <LEADER>t :tabe<CR>
 map <LEADER>- :-tabnext<CR>
 map <LEADER>= :+tabnext<CR>
+nnoremap <LEADER><Tab> <C-^>
 
 " 复制到剪贴板
 " nmap <c-v> "+gp
@@ -72,4 +73,34 @@ map Q :q<CR>
 " 缓冲区切换
 map <leader><Right> :bnext<CR>
 map <leader><Left> :bprevious<CR>
+
+" 删除缓冲区
+nnoremap <Leader>w :bd<CR>
+
+" 格式化选中区域
+vmap <leader>f  <Plug>(coc-format-selected) 
+xmap <leader>f  <Plug>(coc-format-selected)
+" 格式化整个文件
+nmap <leader>f  <Plug>(coc-format)
+
+" Neovim 0.11+: 自动识别并使 coc.nvim 继承项目 .vscode/settings.json
+if has('nvim')
+lua << EOF
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    local root = vim.fs.root(0, { ".vscode", ".git" })
+    if not root then return end
+    local vscode_settings = root .. "/.vscode/settings.json"
+    local vim_dir = root .. "/.vim"
+    local coc_settings = vim_dir .. "/coc-settings.json"
+
+    if vim.uv.fs_stat(vscode_settings) and not vim.uv.fs_stat(coc_settings) then
+      vim.fn.mkdir(vim_dir, "p")
+      vim.uv.fs_symlink("../.vscode/settings.json", coc_settings)
+    end
+  end
+})
+EOF
+endif
+
 

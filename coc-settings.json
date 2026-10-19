@@ -5,6 +5,27 @@
   "eslint.codeAction.showDocumentation": {
     "enable": true
   },
+  "floatFactory.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "hover.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "diagnostic.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "signature.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "suggest.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "dialog.rounded": true,
   "suggest.completionItemKindLabels": {
     "class": "类",
     "color": "颜",
@@ -42,6 +63,7 @@
     "PAYPAL",
     "REFUNED",
     "Srmklive",
+    "Upsell",
     "Vuex",
     "aggs",
     "apiclient",
@@ -49,16 +71,21 @@
     "endcomponent",
     "endphp",
     "endsection",
+    "groupid",
     "iife",
     "laravel",
     "mygroup",
     "phpls",
     "portfinder",
     "seckill",
+    "semibold",
     "skus",
     "struct",
     "swal",
+    "testid",
     "tiktok",
+    "unachieved",
+    "underbust",
     "vdebug",
     "vetur",
     "wechat",
@@ -91,6 +118,28 @@
     "javascript": "javascriptreact"
   },
   "prettier.enable": true,
+  "prettier.requireConfig": false,
+  "prettier.tabWidth": 2,
+  "prettier.endOfLine": "lf",
+  "prettier.filetypes": [
+    "css",
+    "javascript",
+    "typescript",
+    "html",
+    "json",
+    "less",
+    "markdown",
+    "vue",
+    "yaml",
+    "liquid"
+  ],
+  "languageserver": {
+    "liquid": {
+      "command": "shopify",
+      "args": ["theme", "language-server"],
+      "filetypes": ["liquid"]
+    }
+  },
   "tailwindCSS.emmetCompletions": true,
   "tailwindCSS.headwind.runOnSave": false,
   "json": {
@@ -99,8 +148,11 @@
       "enable": true
     },
     "format": {
-      "enable": false,
+      "enable": true,
       "keepLines": true
     }
-  }
+  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false
 }

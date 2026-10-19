@@ -28,8 +28,7 @@ Plug 'mattn/emmet-vim'
 " php 支持
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' :['markdown', 'vim-plug'] }
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+Plug 'sammaji/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for': ['markdown', 'vim-plug'] }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -68,13 +67,13 @@ Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'preservim/nerdcommenter'
 
 " xdebug调试
-" Plug 'brookhong/dbgpavim'
+"filename Plug 'brookhong/dbgpavim'
 Plug 'vim-vdebug/vdebug'
 
 " 格式化插件
-Plug 'prettier/vim-prettier', {
-    \ 'do': 'yarn install --frozen-lockfile --production',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+" Plug 'prettier/vim-prettier', {
+"     \ 'do': 'yarn install --frozen-lockfile --production',
+"     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', ] }
 
 " 多光标选择插件
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
