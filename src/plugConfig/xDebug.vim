@@ -32,6 +32,9 @@ if has_dapui then
       max_height = 0.5,    -- 最大高度不超过屏幕 50%
       max_width = 0.6,     -- 最大宽度不超过屏幕 60%，杜绝撑满全屏
       border = 'rounded',  -- 圆角边框更美观
+      mappings = {
+        close = { 'q', '<Esc>' },
+      },
     },
   })
 
@@ -45,6 +48,67 @@ if has_dapui then
   dap.listeners.before.event_exited['dapui_config'] = function()
     dapui.close()
   end
+
+  -- 浮窗按 ESC / q 直接关闭并返回代码窗口
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'dapui_hover',
+    callback = function(args)
+      vim.keymap.set('n', '<Esc>', '<Cmd>close<CR>', { buffer = args.buf, silent = true, nowait = true })
+      vim.keymap.set('n', 'q', '<Cmd>close<CR>', { buffer = args.buf, silent = true, nowait = true })
+    end,
+  })
+
+  -- 查找当前打开的 dapui_hover 浮窗
+  local function find_hover_win()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      if vim.bo[buf].filetype == 'dapui_hover' and vim.api.nvim_win_get_config(win).relative ~= '' then
+        return win
+      end
+    end
+    return nil
+  end
+
+  -- 按 Enter 键才进入浮窗；无浮窗时保持正常回车
+  vim.keymap.set('n', '<CR>', function()
+    local hover_win = find_hover_win()
+    if hover_win and vim.api.nvim_win_get_cursor and vim.api.nvim_win_is_valid(hover_win) then
+      vim.api.nvim_set_current_win(hover_win)
+      return
+    end
+    vim.cmd('normal! ' .. vim.v.count1 .. '\r')
+  end, { silent = true, desc = '按回车进入调试悬浮窗' })
+
+  -- 提取光标下的有效 PHP 变量（必须带 $ 且长度大于 1，防段错误）
+  local function get_php_var_under_cursor()
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+    local before = line:sub(1, col)
+    local after = line:sub(col + 1)
+    local prefix = before:match('[%$%w_]*$') or ''
+    local suffix = after:match('^[%w_]*') or ''
+    local expr = prefix .. suffix
+    if expr:sub(1, 1) == '$' and #expr > 1 then
+      return expr
+    end
+    return nil
+  end
+
+  -- 停留感应延迟 500ms：仅在断点暂停且光标在有效变量时触发，enter=false 不聚焦
+  vim.opt.updatetime = 500
+  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+    callback = function()
+      local session = dap.session()
+      if session and session.current_frame and vim.bo.buftype == '' and vim.bo.filetype == 'php' then
+        local var = get_php_var_under_cursor()
+        if var then
+          pcall(function()
+            dapui.eval(var, { enter = false })
+          end)
+        end
+      end
+    end,
+  })
 end
 
 -- 3. 断点图标美化
