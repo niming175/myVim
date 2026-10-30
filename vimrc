@@ -196,12 +196,8 @@ imap <C-x> <Esc>:wq<CR>
 " let g:dbgPavimPort = 9000
 " let g:dbgPavimBreakAtEntry = 0
 
-if !exists('g:vdebug_options')
-    let g:vdebug_options = {}
-endif
-let g:vdebug_options.port = 9000
-let g:vdebug_options.path_maps = { "/var/www": "/Volumes/Document/www" }
-let g:vdebug_options.break_on_open = 0
+" Xdebug 调试配置
+call SourceFIle('/src/plugConfig/xDebug.vim')
 
 "*********** vim-visual-multi 多光标配置 *******************"
 let g:VM_theme                      = 'ocean'

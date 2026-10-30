@@ -66,9 +66,11 @@ Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 " 注释插件
 Plug 'preservim/nerdcommenter'
 
-" xdebug调试
-"filename Plug 'brookhong/dbgpavim'
-Plug 'vim-vdebug/vdebug'
+" 现代 DAP (Debug Adapter Protocol) 调试全家桶
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'theHamsta/nvim-dap-virtual-text'
 
 " 格式化插件
 " Plug 'prettier/vim-prettier', {

@@ -6,6 +6,9 @@ set nocompatible
 set cursorline " 光标线
 set showcmd
 
+" 关联系统剪贴板
+set clipboard=unnamed,unnamedplus
+
 " 搜索
 set hlsearch
 exec "nohlsearch"
